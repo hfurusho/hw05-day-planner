@@ -7,6 +7,8 @@
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
     />
     <link
       rel="stylesheet"
@@ -18,7 +20,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>Work Day Scheduler</title>
   </head>
 
@@ -30,9 +32,22 @@
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
+      <div class="row">
+        <div class="col-2 w-100 h-100 mx-0 my-0 px-0 py-0">
+          <div class="w-100 h-100 text-right">
+            <span class="hour">9 AM</span>
+          </div>
+        </div>
+        <div class="col-8 w-100 h-100 mx-0 my-0 px-0 py-0">
+          <textarea class="past w-100 h-100 px-0 py-0" name="" id=""></textarea>
+        </div>
+        <div class="col-2 w-100 h-100 mx-0 my-0 px-0 py-0">
+          <button class="save-btn w-100 h-100 px-0 py-0"></button>
+        </div>
+      </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./scripts/app.js"></script>
   </body>
 </html>
