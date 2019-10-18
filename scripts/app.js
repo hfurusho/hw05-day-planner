@@ -43,7 +43,7 @@ function populateTimeBlocks() {
     saveDiv.append(saveBtn);
 
     row.append(timeColDiv, textDiv, saveDiv);
-    $(".container").append(row);
+    $(".schedule").append(row);
   }
 }
 
