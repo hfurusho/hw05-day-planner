@@ -1,7 +1,8 @@
 let today = moment().format("dddd, MMMM Do");
+let tasks = getTasks();
 $("#currentDay").text(today);
-
 populateTimeBlocks();
+$(".save-btn").on("click", saveTask);
 
 // TODO: Refactor this function
 function populateTimeBlocks() {
@@ -23,6 +24,7 @@ function populateTimeBlocks() {
     let textArea = $("<textarea class='w-100 h-100'>");
     let textAreaId = "text-area-" + i;
     textArea.attr("id", textAreaId);
+
     if (hourNow == hourNum) {
       textArea.addClass("present");
     } else if (hourNow > hourNum) {
@@ -30,6 +32,7 @@ function populateTimeBlocks() {
     } else {
       textArea.addClass("future");
     }
+    textArea.val(tasks[i - 9]);
     textDiv.append(textArea);
 
     let saveDiv = $("<div class='col-1 w-100 h-100 mx-0 my-0 px-0 py-0'>");
@@ -44,8 +47,6 @@ function populateTimeBlocks() {
   }
 }
 
-let tasks = getTasks();
-
 function getTasks() {
   let tasks;
   tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -55,10 +56,9 @@ function getTasks() {
   return tasks;
 }
 
-$(".save-btn").on("click", saveTask);
-
 function saveTask() {
   let textAreaTimeBlock = parseInt($(this).attr("data-textarea"));
   let textAreaVal = $("#text-area-" + textAreaTimeBlock).val();
   tasks[textAreaTimeBlock - 9] = textAreaVal;
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
