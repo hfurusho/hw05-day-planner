@@ -2,15 +2,16 @@ body {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1;
+  background-image: url(../images/ben-kolde-EBdGhK7lKFE-unsplash.jpg);
+  background-size: cover;
 }
 
 textarea {
   background: transparent;
-  border-top: 1px solid black;
   resize: none;
   color: #000000;
-  border-left: 1px solid black;
   padding: 10px;
+  box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.4);
 }
 
 .jumbotron {
@@ -18,7 +19,7 @@ textarea {
   background-color: rgba(255, 255, 255, 1);
   color: black;
   border-radius: 0;
-  border-bottom: 10px solid black;
+  border-bottom: 2px solid hsl(0, 0%, 46%);
 }
 
 .description {
@@ -26,8 +27,7 @@ textarea {
 }
 
 .time-block {
-  text-align: center;
-  border-radius: 15px;
+  border-top: 1px dashed hsl(0, 0%, 50%);
 }
 
 .row {
@@ -40,40 +40,45 @@ textarea {
 }
 
 .past {
-  background-color: #d3d3d3;
+  background-color: hsl(0, 0%, 50%);
+  border: 1px solid hsl(0, 0%, 60%);
+  border-bottom: 1px solid hsl(0, 0%, 70%);
 }
 
 .present {
-  background-color: #ff6961;
+  background-color: hsl(7, 66%, 57%);
+  border: 1px solid hsl(7, 66%, 60%);
+  border-bottom: 1px solid hsl(7, 66%, 65%);
 }
 
 .future {
-  background-color: #77dd77;
+  background-color: hsl(127, 66%, 57%);
+  border: 1px solid hsl(127, 66%, 60%);
+  border-bottom: 1px solid hsl(127, 66%, 70%);
 }
 
 .past,
 .present,
 .future {
-  color: black;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .save-btn {
-  border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: #06aed5;
+  background-color: hsl(247, 66%, 57%);
   color: white;
+  font-size: 16px;
+  border: 1px solid hsl(247, 66%, 50%);
+  border-bottom: 1px solid hsl(247, 66%, 43%);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.4);
+  transition: font-size 250ms ease-in-out, background-color 250ms ease-in-out;
 }
 
-.save-btn i:hover {
+.save-btn:hover,
+.save-btn:focus {
   font-size: 20px;
-  transition: all 0.3s ease-in-out;
-}
-
-body {
-  background-image: url(../images/ben-kolde-EBdGhK7lKFE-unsplash.jpg);
-  background-size: cover;
+  background-color: hsl(247, 66%, 63%);
 }
 
 .schedule {

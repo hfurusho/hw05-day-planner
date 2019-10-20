@@ -6,21 +6,20 @@ $(".save-btn").on("click", saveTask);
 
 // TODO: Refactor this function
 function populateTimeBlocks() {
-  let hourNow = parseInt(moment().hour());
+  let hourNow = 13; // CHANGE WITH THE BELOW
+  // parseInt(moment().hour());
 
   for (let i = 9; i < 18; i++) {
     let hour = moment().hour(i);
     let hourNum = parseInt(hour.format("H"));
     let row = $("<div class='row'>");
 
-    let timeColDiv = $("<div class='col-2 w-100 h-100 mx-0 my-0 px-0 py-0'>");
-    let timeDiv = $("<div class='w-100 h-100 text-right'>");
+    let timeDiv = $("<div class='col-1 px-1 py-1 text-right time-block'>");
     let timeSpan = $("<span class='hour'>");
     timeSpan.text(hour.format("h A"));
     timeDiv.append(timeSpan);
-    timeColDiv.append(timeDiv);
 
-    let textDiv = $("<div class='col-9 w-100 h-100 mx-0 my-0 px-0 py-0'>");
+    let textDiv = $("<div class='col-10 px-0'>");
     let textArea = $("<textarea class='w-100 h-100'>");
     let textAreaId = "text-area-" + i;
     textArea.attr("id", textAreaId);
@@ -35,14 +34,14 @@ function populateTimeBlocks() {
     textArea.val(tasks[i - 9]);
     textDiv.append(textArea);
 
-    let saveDiv = $("<div class='col-1 w-100 h-100 mx-0 my-0 px-0 py-0'>");
+    let saveDiv = $("<div class='col-1 px-0 py-0'>");
     let saveBtn = $(
-      "<button type='button' class='save-btn w-100 h-100 px-0 py-0'>"
+      "<button type='button' class='save-btn w-100 h-100'><i class='far fa-save'></i></button>"
     );
     saveBtn.attr("data-textarea", i);
     saveDiv.append(saveBtn);
 
-    row.append(timeColDiv, textDiv, saveDiv);
+    row.append(timeDiv, textDiv, saveDiv);
     $(".schedule").append(row);
   }
 }
