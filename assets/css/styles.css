@@ -6,14 +6,6 @@ body {
   background-size: cover;
 }
 
-textarea {
-  background: transparent;
-  resize: none;
-  color: #000000;
-  padding: 10px;
-  box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.4);
-}
-
 .jumbotron {
   text-align: center;
   background-color: rgba(255, 255, 255, 1);
@@ -26,8 +18,8 @@ textarea {
   white-space: pre-wrap;
 }
 
-.time-block {
-  border-top: 1px dashed hsl(0, 0%, 50%);
+.schedule {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .row {
@@ -35,8 +27,20 @@ textarea {
   height: 80px;
 }
 
+.time-block {
+  border-top: 1px dashed hsl(0, 0%, 50%);
+}
+
 .hour {
   color: #000000;
+}
+
+textarea {
+  background: transparent;
+  resize: none;
+  color: #000000;
+  padding: 10px;
+  box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.4);
 }
 
 .past {
@@ -72,6 +76,7 @@ textarea {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.4);
+  position: relative;
   transition: font-size 250ms ease-in-out, background-color 250ms ease-in-out;
 }
 
@@ -81,6 +86,6 @@ textarea {
   background-color: hsl(247, 66%, 63%);
 }
 
-.schedule {
-  background-color: rgba(255, 255, 255, 0.8);
+.save-btn:active {
+  background-color: hsl(247, 66%, 53%);
 }

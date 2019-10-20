@@ -1,28 +1,42 @@
-let today = moment().format("dddd, MMMM Do");
-let tasks = getTasks();
-$("#currentDay").text(today);
-populateTimeBlocks();
-$(".save-btn").on("click", saveTask);
+$("document").ready(function() {
+  let today = moment().format("dddd, MMMM Do");
+  let tasks = getTasks();
+  $("#currentDay").text(today);
+  populateTimeBlocks();
+  $(".save-btn").on("click", saveTask);
 
-// TODO: Refactor this function
-function populateTimeBlocks() {
-  let hourNow = 13; // CHANGE WITH THE BELOW
-  // parseInt(moment().hour());
+  // Populates the scheduler with hour time blocks from 9AM to 5PM
+  function populateTimeBlocks() {
+    let hourNow = parseInt(moment().hour());
 
-  for (let i = 9; i < 18; i++) {
-    let hour = moment().hour(i);
-    let hourNum = parseInt(hour.format("H"));
-    let row = $("<div class='row'>");
+    for (let i = 9; i < 18; i++) {
+      let hour = moment().hour(i);
+      let hourNum = parseInt(hour.format("H"));
 
+      let row = $("<div class='row'>");
+      let timeDiv = createTimeDiv(hour);
+      let textDiv = createTextAreaDiv(i, hourNow, hourNum);
+      let saveDiv = createSaveBtn(i);
+
+      row.append(timeDiv, textDiv, saveDiv);
+      $(".schedule").append(row);
+    }
+  }
+
+  // Creates and returns the time div based on the hour of the day.
+  function createTimeDiv(hour) {
     let timeDiv = $("<div class='col-1 px-1 py-1 text-right time-block'>");
     let timeSpan = $("<span class='hour'>");
     timeSpan.text(hour.format("h A"));
     timeDiv.append(timeSpan);
+    return timeDiv;
+  }
 
+  // Creates and returns the text area to write in your task for that hour.
+  function createTextAreaDiv(textAreaIdNum, hourNow, hourNum) {
     let textDiv = $("<div class='col-10 px-0'>");
     let textArea = $("<textarea class='w-100 h-100'>");
-    let textAreaId = "text-area-" + i;
-    textArea.attr("id", textAreaId);
+    textArea.attr("id", "textarea-" + textAreaIdNum);
 
     if (hourNow == hourNum) {
       textArea.addClass("present");
@@ -31,33 +45,37 @@ function populateTimeBlocks() {
     } else {
       textArea.addClass("future");
     }
-    textArea.val(tasks[i - 9]);
+    textArea.val(tasks[textAreaIdNum - 9]);
     textDiv.append(textArea);
+    return textDiv;
+  }
 
+  // Creates and returns the button that saves the task for the hour block to localStorage..
+  function createSaveBtn(textAreaIdNum) {
     let saveDiv = $("<div class='col-1 px-0 py-0'>");
     let saveBtn = $(
       "<button type='button' class='save-btn w-100 h-100'><i class='far fa-save'></i></button>"
     );
-    saveBtn.attr("data-textarea", i);
+    saveBtn.attr("data-textarea", textAreaIdNum);
     saveDiv.append(saveBtn);
-
-    row.append(timeDiv, textDiv, saveDiv);
-    $(".schedule").append(row);
+    return saveDiv;
   }
-}
 
-function getTasks() {
-  let tasks;
-  tasks = JSON.parse(localStorage.getItem("tasks"));
-  if (!tasks) {
-    tasks = new Array(8);
+  // Returns the saved tasks for each hour block. Returns an empty array if no tasks have been saved.
+  function getTasks() {
+    let tasks;
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+    if (!tasks) {
+      tasks = new Array(8);
+    }
+    return tasks;
   }
-  return tasks;
-}
 
-function saveTask() {
-  let textAreaTimeBlock = parseInt($(this).attr("data-textarea"));
-  let textAreaVal = $("#text-area-" + textAreaTimeBlock).val();
-  tasks[textAreaTimeBlock - 9] = textAreaVal;
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
+  // Save button functionality: saves the task for the corresponding hour block to localStorage.
+  function saveTask() {
+    let textAreaTimeBlock = parseInt($(this).attr("data-textarea"));
+    let textAreaVal = $("#textarea-" + textAreaTimeBlock).val();
+    tasks[textAreaTimeBlock - 9] = textAreaVal;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+});
